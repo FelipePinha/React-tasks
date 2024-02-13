@@ -1,4 +1,5 @@
 import { Form } from './components/Form';
+import { Todo } from './components/Todo';
 
 function App() {
     return (
@@ -20,6 +21,14 @@ function App() {
                 </div>
 
                 <Form />
+
+                <div className="w-full h-[200px] overflow-y-scroll mt-6">
+                    <Todo />
+                    <Todo />
+                    <Todo />
+                    <Todo />
+                    <Todo />
+                </div>
             </div>
         </main>
     );
