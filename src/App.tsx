@@ -1,7 +1,9 @@
+import { Form } from './components/Form';
+
 function App() {
     return (
         <main className="h-screen w-screen flex justify-center items-center p-5 text-neutral-500">
-            <div className="bg-white shadow-sm shadow-stone-400 p-5 md:p-14 w-full max-w-[600px] rounded-md">
+            <div className="bg-white shadow-sm shadow-stone-400 p-5 md:p-14 w-full max-w-[800px] rounded-md">
                 <header className="w-full flex justify-between items-center">
                     <div className="flex items-center gap-1">
                         <p className="font-bold text-5xl">13</p>
@@ -12,6 +14,12 @@ function App() {
                     </div>
                     <p className="text-lg">Tuesday</p>
                 </header>
+
+                <div className="h-4 w-full bg-neutral-300 mt-6 rounded-sm">
+                    <div className="h-full w-1/2 bg-green-400 rounded-sm"></div>
+                </div>
+
+                <Form />
             </div>
         </main>
     );
