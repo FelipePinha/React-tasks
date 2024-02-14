@@ -1,6 +1,7 @@
 import { MinusCircle, CheckCircle } from 'lucide-react';
 import { TodoTypes } from '../types/todos';
 import { Dispatch, SetStateAction } from 'react';
+import { clsx } from 'clsx';
 
 interface TodoComponentProps {
     todo: TodoTypes;
@@ -29,7 +30,14 @@ export function Todo({ todo, setTodos }: TodoComponentProps) {
     }
 
     return (
-        <div className="mt-3 bg-neutral-200 p-2 flex justify-between items-center pl-2 group hover:bg-white border-2 border-neutral-200 cursor-default rounded-md">
+        <div
+            className={clsx(
+                'mt-3 p-2 flex justify-between items-center pl-2 group  border-2 hover:bg-white cursor-default rounded-md',
+                todo.completed
+                    ? 'bg-green-400 border-green-400 text-white hover:text-neutral-500'
+                    : 'bg-neutral-200  border-neutral-200'
+            )}
+        >
             <p>{todo.content}</p>
             <div className="hidden items-center gap-2 group-hover:flex">
                 <button onClick={handleDeleteTodo} className="text-red-600">
