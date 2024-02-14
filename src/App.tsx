@@ -14,6 +14,7 @@ function App() {
         return [];
     });
     const [textFilter, setTextFilter] = useState('');
+    const [buttonFilter, setButtonFilter] = useState('all');
 
     function createTodo(content: string) {
         const newTodo = {
@@ -29,7 +30,22 @@ function App() {
         setTodos(todoList);
     }
 
-    const textFilterResult = todos.filter(todo => todo.content.toLowerCase().includes(textFilter));
+    function clearAllSearch() {
+        setButtonFilter('all');
+        setTextFilter('');
+    }
+
+    const filterResults = todos
+        .filter(todo => {
+            if (buttonFilter === 'all') {
+                return todo;
+            } else if (buttonFilter === 'pending') {
+                return todo.completed === false;
+            } else {
+                return todo.completed === true;
+            }
+        })
+        .filter(todo => todo.content.toLowerCase().includes(textFilter));
 
     return (
         <main className="h-screen w-screen flex justify-center items-center p-5 text-neutral-500">
@@ -49,13 +65,24 @@ function App() {
                     <div className="h-full w-1/2 bg-green-400 rounded-sm"></div>
                 </div>
 
-                <Form setTextFilter={setTextFilter} createTodo={createTodo} />
+                <Form
+                    setTextFilter={setTextFilter}
+                    createTodo={createTodo}
+                    setButtonFilter={setButtonFilter}
+                    buttonFilter={buttonFilter}
+                />
 
                 <div className="w-full h-[200px] overflow-y-scroll mt-6">
-                    {todos.length === 0 ? (
-                        <p className="text-center">Todo list is empty</p>
+                    {filterResults.length === 0 ? (
+                        <p>
+                            Your search found no results.{' '}
+                            <button onClick={clearAllSearch} className="underline">
+                                Clean the search here
+                            </button>{' '}
+                            to se all items
+                        </p>
                     ) : (
-                        textFilterResult.map(todo => (
+                        filterResults.map(todo => (
                             <Todo key={todo.id} todo={todo} setTodos={setTodos} />
                         ))
                     )}

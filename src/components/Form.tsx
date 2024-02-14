@@ -1,12 +1,15 @@
 import { Dispatch, FormEvent, SetStateAction, useState } from 'react';
 import { Check, PlusCircle, Search } from 'lucide-react';
+import { clsx } from 'clsx';
 
 interface FormProps {
     createTodo: (content: string) => void;
     setTextFilter: Dispatch<SetStateAction<string>>;
+    setButtonFilter: Dispatch<SetStateAction<string>>;
+    buttonFilter: string;
 }
 
-export function Form({ createTodo, setTextFilter }: FormProps) {
+export function Form({ createTodo, setTextFilter, setButtonFilter, buttonFilter }: FormProps) {
     const [content, setContent] = useState('');
 
     function handleSaveTodo(e: FormEvent) {
@@ -19,22 +22,52 @@ export function Form({ createTodo, setTextFilter }: FormProps) {
         setContent('');
     }
 
+    function handleClickDoneFilterButton() {
+        if (buttonFilter === 'done') {
+            setButtonFilter('all');
+            return;
+        }
+
+        setButtonFilter('done');
+    }
+
+    function handleClickPendingFilterButton() {
+        if (buttonFilter === 'pending') {
+            setButtonFilter('all');
+            return;
+        }
+
+        setButtonFilter('pending');
+    }
+
     return (
         <form onSubmit={handleSaveTodo} className="mt-6">
             <div className="flex flex-col-reverse md:flex-row items-center gap-3 md:gap-8">
                 <div className="flex items-center gap-2 justify-end w-full md:w-60">
                     <button
-                        className="flex gap-1 items-center border border-1 text-sm py-1 px-2 bg-slate-100 border-sky-400 text-sky-400 rounded-full"
+                        onClick={handleClickDoneFilterButton}
+                        className={clsx(
+                            'flex gap-1 items-center border border-1 text-sm py-1 px-2 rounded-full',
+                            buttonFilter === 'done'
+                                ? 'bg-slate-100 border-sky-400 text-sky-400'
+                                : ''
+                        )}
                         type="button"
                     >
-                        <Check className="size-4" />
+                        {buttonFilter === 'done' && <Check className="size-4" />}
                         Done
                     </button>
                     <button
-                        className="flex gap-1 items-center border border-1 text-sm py-1 px-2 bg-slate-100 border-sky-400 text-sky-400 rounded-full"
+                        onClick={handleClickPendingFilterButton}
+                        className={clsx(
+                            'flex gap-1 items-center border border-1 text-sm py-1 px-2 rounded-full',
+                            buttonFilter === 'pending'
+                                ? 'bg-slate-100 border-sky-400 text-sky-400'
+                                : ''
+                        )}
                         type="button"
                     >
-                        <Check className="size-4" />
+                        {buttonFilter === 'pending' && <Check className="size-4" />}
                         Pending
                     </button>
                 </div>
