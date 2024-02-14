@@ -1,15 +1,10 @@
 import { useState } from 'react';
 import { Form } from './components/Form';
 import { Todo } from './components/Todo';
-
-type Todo = {
-    id: string;
-    content: string;
-    completed: boolean;
-};
+import { TodoTypes } from './types/todos';
 
 function App() {
-    const [todos, setTodos] = useState<Todo[]>(() => {
+    const [todos, setTodos] = useState<TodoTypes[]>(() => {
         const todosOnStorage = localStorage.getItem('todos');
 
         if (todosOnStorage) {
@@ -55,7 +50,7 @@ function App() {
 
                 <div className="w-full h-[200px] overflow-y-scroll mt-6">
                     {todos.map(todo => (
-                        <Todo key={todo.id} />
+                        <Todo key={todo.id} todo={todo} />
                     ))}
                 </div>
             </div>

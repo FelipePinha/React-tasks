@@ -14,6 +14,8 @@ export function Form({ createTodo }: FormProps) {
         if (!content) return;
 
         createTodo(content);
+
+        setContent('');
     }
 
     return (
