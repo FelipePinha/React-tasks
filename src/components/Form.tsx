@@ -1,11 +1,12 @@
-import { FormEvent, useState } from 'react';
+import { Dispatch, FormEvent, SetStateAction, useState } from 'react';
 import { Check, PlusCircle, Search } from 'lucide-react';
 
 interface FormProps {
     createTodo: (content: string) => void;
+    setTextFilter: Dispatch<SetStateAction<string>>;
 }
 
-export function Form({ createTodo }: FormProps) {
+export function Form({ createTodo, setTextFilter }: FormProps) {
     const [content, setContent] = useState('');
 
     function handleSaveTodo(e: FormEvent) {
@@ -39,6 +40,7 @@ export function Form({ createTodo }: FormProps) {
                 </div>
                 <div className="relative w-full">
                     <input
+                        onChange={e => setTextFilter(e.target.value)}
                         className="w-full p-2 rounded-md outline-none border-slate-300 border border-1"
                         type="text"
                         placeholder="search items"
