@@ -1,8 +1,23 @@
+import { FormEvent, useState } from 'react';
 import { Check, PlusCircle, Search } from 'lucide-react';
 
-export function Form() {
+interface FormProps {
+    createTodo: (content: string) => void;
+}
+
+export function Form({ createTodo }: FormProps) {
+    const [content, setContent] = useState('');
+
+    function handleSaveTodo(e: FormEvent) {
+        e.preventDefault();
+
+        if (!content) return;
+
+        createTodo(content);
+    }
+
     return (
-        <form className="mt-6">
+        <form onSubmit={handleSaveTodo} className="mt-6">
             <div className="flex flex-col-reverse md:flex-row items-center gap-3 md:gap-8">
                 <div className="flex items-center gap-2 justify-end w-full md:w-60">
                     <button
@@ -32,6 +47,8 @@ export function Form() {
 
             <div className="relative w-full mt-6">
                 <input
+                    onChange={e => setContent(e.target.value)}
+                    value={content}
                     className="w-full p-2 rounded-md outline-none border-slate-300 border border-1"
                     type="text"
                     placeholder="Add new item"

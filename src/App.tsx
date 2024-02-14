@@ -1,7 +1,38 @@
+import { useState } from 'react';
 import { Form } from './components/Form';
 import { Todo } from './components/Todo';
 
+type Todo = {
+    id: string;
+    content: string;
+    completed: boolean;
+};
+
 function App() {
+    const [todos, setTodos] = useState<Todo[]>(() => {
+        const todosOnStorage = localStorage.getItem('todos');
+
+        if (todosOnStorage) {
+            return JSON.parse(todosOnStorage);
+        }
+
+        return [];
+    });
+
+    function createTodo(content: string) {
+        const newTodo = {
+            id: crypto.randomUUID(),
+            content,
+            completed: false,
+        };
+
+        const todoList = [newTodo, ...todos];
+
+        localStorage.setItem('todos', JSON.stringify(todoList));
+
+        setTodos(todoList);
+    }
+
     return (
         <main className="h-screen w-screen flex justify-center items-center p-5 text-neutral-500">
             <div className="bg-white shadow-sm shadow-stone-400 p-5 md:p-14 w-full max-w-[800px] rounded-md">
@@ -20,14 +51,12 @@ function App() {
                     <div className="h-full w-1/2 bg-green-400 rounded-sm"></div>
                 </div>
 
-                <Form />
+                <Form createTodo={createTodo} />
 
                 <div className="w-full h-[200px] overflow-y-scroll mt-6">
-                    <Todo />
-                    <Todo />
-                    <Todo />
-                    <Todo />
-                    <Todo />
+                    {todos.map(todo => (
+                        <Todo key={todo.id} />
+                    ))}
                 </div>
             </div>
         </main>
