@@ -43,9 +43,11 @@ export function Todo({ todo, setTodos }: TodoComponentProps) {
                 <button onClick={handleDeleteTodo} className="text-red-600">
                     <MinusCircle />
                 </button>
-                <button onClick={handleCompleteTodo} className="text-green-600 rounded-r-md">
-                    <CheckCircle />
-                </button>
+                {!todo.completed && (
+                    <button onClick={handleCompleteTodo} className="text-green-600 rounded-r-md">
+                        <CheckCircle />
+                    </button>
+                )}
             </div>
         </div>
     );
