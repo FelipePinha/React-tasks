@@ -73,7 +73,9 @@ function App() {
                 />
 
                 <div className="w-full h-[200px] overflow-y-scroll mt-6">
-                    {filterResults.length === 0 ? (
+                    {todos.length === 0 ? (
+                        <p>Your list is empty. Try add some items by filling in the field above</p>
+                    ) : filterResults.length === 0 ? (
                         <p>
                             Your search found no results.{' '}
                             <button onClick={clearAllSearch} className="underline">
