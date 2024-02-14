@@ -49,9 +49,11 @@ function App() {
                 <Form createTodo={createTodo} />
 
                 <div className="w-full h-[200px] overflow-y-scroll mt-6">
-                    {todos.map(todo => (
-                        <Todo key={todo.id} todo={todo} />
-                    ))}
+                    {todos.length === 0 ? (
+                        <p className="text-center">Todo list is empty</p>
+                    ) : (
+                        todos.map(todo => <Todo key={todo.id} todo={todo} setTodos={setTodos} />)
+                    )}
                 </div>
             </div>
         </main>
