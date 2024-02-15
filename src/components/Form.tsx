@@ -73,7 +73,7 @@ export function Form({ createTodo, setTextFilter, setButtonFilter, buttonFilter 
                 </div>
                 <div className="relative w-full">
                     <input
-                        onChange={e => setTextFilter(e.target.value)}
+                        onChange={e => setTextFilter(e.target.value.toLowerCase())}
                         className="w-full p-2 rounded-md outline-none border-slate-300 border border-1"
                         type="text"
                         placeholder="search items"
