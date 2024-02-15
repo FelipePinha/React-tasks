@@ -64,7 +64,7 @@ function App() {
                     buttonFilter={buttonFilter}
                 />
 
-                <div className="w-full h-[200px] overflow-y-scroll mt-6">
+                <div className="w-full h-[200px] overflow-y-auto mt-6">
                     {todos.length === 0 ? (
                         <p>Your list is empty. Try add some items by filling in the field above</p>
                     ) : filterResults.length === 0 ? (
