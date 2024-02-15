@@ -51,8 +51,8 @@ function App() {
         .filter(todo => todo.content.toLowerCase().includes(textFilter));
 
     return (
-        <main className="h-screen w-screen flex justify-center items-center p-5 text-neutral-500">
-            <div className="bg-white shadow-sm shadow-stone-400 p-5 md:p-14 w-full max-w-[800px] rounded-md">
+        <main className="h-screen w-screen flex justify-center items-center md:p-5 text-neutral-500">
+            <div className="bg-white shadow-sm shadow-stone-400 p-5 md:p-14 w-full h-full md:h-auto md:max-w-[800px] rounded-md">
                 <Header />
 
                 <Percentage todos={todos} />
