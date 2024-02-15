@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Form } from './components/Form';
 import { Todo } from './components/Todo';
 import { TodoTypes } from './types/todos';
+import { Percentage } from './components/Percentage';
 
 function App() {
     const [todos, setTodos] = useState<TodoTypes[]>(() => {
@@ -61,9 +62,7 @@ function App() {
                     <p className="text-lg">Tuesday</p>
                 </header>
 
-                <div className="h-4 w-full bg-neutral-300 mt-6 rounded-sm">
-                    <div className="h-full w-1/2 bg-green-400 rounded-sm"></div>
-                </div>
+                <Percentage todos={todos} />
 
                 <Form
                     setTextFilter={setTextFilter}
