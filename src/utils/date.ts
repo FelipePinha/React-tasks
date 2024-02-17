@@ -19,10 +19,11 @@ export function getWeekDay() {
             day = 'Thursday';
             break;
         case 5:
-            day = 'friday';
+            day = 'Friday';
             break;
-        default:
-            'Saturday';
+        case 6:
+            day = 'Saturday';
+            break;
     }
 
     return day;

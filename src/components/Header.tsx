@@ -6,6 +6,8 @@ export function Header() {
     const currentMonth = getCurrentMonth();
     const currentYear = new Date().getFullYear();
 
+    console.log(currentWeekDay);
+
     return (
         <header className="w-full flex justify-between items-center">
             <div className="flex items-center gap-1">
