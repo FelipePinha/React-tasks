@@ -20,7 +20,7 @@ export function Percentage({ todos }: PercentageProps) {
     return (
         <div className="h-4 w-full bg-neutral-300 mt-6 rounded-sm">
             <div
-                style={{ width: `${calculatePercentage()}%` }}
+                style={{ width: `${calculatePercentage()}%`, transition: 'width 0.2s ease' }}
                 className={`h-full bg-green-400 rounded-sm`}
             ></div>
         </div>
