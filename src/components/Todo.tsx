@@ -1,4 +1,4 @@
-import { MinusCircle, CheckCircle } from 'lucide-react';
+import { MinusCircle, CheckCircle, Undo } from 'lucide-react';
 import { TodoTypes } from '../types/todos';
 import { Dispatch, SetStateAction } from 'react';
 import { clsx } from 'clsx';
@@ -23,7 +23,11 @@ export function Todo({ todo, setTodos }: TodoComponentProps) {
 
         const todoIndex = todoList.findIndex((item: TodoTypes) => item.id === todo.id);
 
-        todoList[todoIndex].completed = true;
+        if (!todoList[todoIndex].completed) {
+            todoList[todoIndex].completed = true;
+        } else {
+            todoList[todoIndex].completed = false;
+        }
 
         localStorage.setItem('todos', JSON.stringify(todoList));
         setTodos(todoList);
@@ -40,14 +44,19 @@ export function Todo({ todo, setTodos }: TodoComponentProps) {
         >
             <p>{todo.content}</p>
             <div className="md:hidden flex items-center gap-2 md:group-hover:flex">
-                <button onClick={handleDeleteTodo} className="text-red-600">
-                    <MinusCircle />
-                </button>
-                {!todo.completed && (
+                {!todo.completed ? (
                     <button onClick={handleCompleteTodo} className="text-green-600 rounded-r-md">
                         <CheckCircle />
                     </button>
+                ) : (
+                    <button onClick={handleCompleteTodo} className="text-yellow-600 rounded-r-md">
+                        <Undo />
+                    </button>
                 )}
+
+                <button onClick={handleDeleteTodo} className="text-red-600">
+                    <MinusCircle />
+                </button>
             </div>
         </div>
     );
